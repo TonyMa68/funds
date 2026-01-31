@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  funds-telegram-bot:
+    build: .
+    container_name: funds-telegram-bot
+    restart: unless-stopped
+    volumes:
+      - ./config.json:/app/config.json:ro
+    environment:
+      - TZ=Asia/Shanghai
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

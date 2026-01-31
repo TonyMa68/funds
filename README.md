@@ -33,6 +33,29 @@
 - 添加基金时支持按拼音、汉字、编码模糊搜索，支持批量添加
 - 行情中心展示，两市资金、行业板块、北向资金、南向资金
 
+## 新功能：Telegram每日推送 🆕
+
+基于原有的基金数据API，新增了自动推送每天基金涨跌情况到Telegram的功能！
+
+**主要特性：**
+- 📱 自动推送基金估值、涨跌幅到Telegram
+- ⏰ 支持自定义定时推送（如早9点、午3:30）
+- 💰 自动计算持仓收益和总收益
+- 📊 美观的消息格式，一目了然
+- 🔄 自动识别交易日，休市日不推送
+
+**快速开始：**
+
+```bash
+cd telegram-bot
+npm install
+cp config.example.json config.json
+# 编辑config.json填入Bot Token和Chat ID
+npm start
+```
+
+详细使用说明请查看：[telegram-bot/README.md](telegram-bot/README.md)
+
 ## 如何使用
 
 **强烈推荐使用 Chrome 商店安装**（这样才能获得自动更新）：[点击跳转至 Chrome 扩展商店](https://chrome.google.com/webstore/detail/dhdelcemeednchdmijiocipbjlknndff)

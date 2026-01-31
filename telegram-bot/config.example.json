@@ -1,0 +1,22 @@
+{
+  "telegram": {
+    "botToken": "YOUR_BOT_TOKEN_HERE",
+    "chatId": "YOUR_CHAT_ID_HERE"
+  },
+  "schedule": {
+    "morningReport": "0 9 0 * * 1-5",
+    "afternoonReport": "0 15 30 * * 1-5"
+  },
+  "funds": [
+    {
+      "code": "001186",
+      "name": "富国文体健康",
+      "shares": 1000
+    },
+    {
+      "code": "110022",
+      "name": "易方达消费行业",
+      "shares": 500
+    }
+  ]
+}

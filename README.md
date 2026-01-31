@@ -41,6 +41,10 @@
 
 ![Telegram消息预览](https://github.com/user-attachments/assets/d67c2cad-f67b-4acb-bb25-094e132557a2)
 
+**GitHub Actions 配置指南：**
+
+![GitHub Actions设置](https://github.com/user-attachments/assets/d725ad46-5ae1-4cc2-b693-c5fb763b9823)
+
 **主要特性：**
 - 📱 自动推送基金估值、涨跌幅到Telegram
 - ⏰ 支持自定义定时推送（如早9点、午3:30）

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Actions 配置图解</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f6f8fa;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #24292f;
+            border-bottom: 3px solid #0969da;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        .step {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f6f8fa;
+            border-left: 4px solid #0969da;
+            border-radius: 6px;
+        }
+        .step h2 {
+            color: #0969da;
+            margin-top: 0;
+        }
+        .code-block {
+            background: #24292f;
+            color: #f0f6fc;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        .highlight {
+            background: #fff8c5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .secret-example {
+            background: #ddf4ff;
+            border: 1px solid #54aeff;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        .secret-example h3 {
+            margin-top: 0;
+            color: #0969da;
+        }
+        .workflow-diagram {
+            background: white;
+            border: 2px solid #d0d7de;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .workflow-box {
+            background: #f6f8fa;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .arrow {
+            text-align: center;
+            font-size: 24px;
+            color: #0969da;
+            margin: 5px 0;
+        }
+        .success {
+            color: #1a7f37;
+            background: #dafbe1;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #1a7f37;
+        }
+        .warning {
+            color: #9a6700;
+            background: #fff8c5;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #bf8700;
+        }
+        ul {
+            line-height: 1.8;
+        }
+        .badge {
+            display: inline-block;
+            background: #0969da;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 GitHub Actions 配置图解指南</h1>
+        
+        <div class="workflow-diagram">
+            <h2 style="margin-top: 0;">⏰ 工作流运行时间</h2>
+            <div class="workflow-box">
+                <strong>🌅 早报</strong><br>
+                每个工作日 上午 9:00<br>
+                <small>（周一至周五）</small>
+            </div>
+            <div class="arrow">⬇️</div>
+            <div class="workflow-box">
+                <strong>📊 午报</strong><br>
+                每个工作日 下午 3:30<br>
+                <small>（周一至周五，收盘后）</small>
+            </div>
+            <div class="arrow">⬇️</div>
+            <div class="workflow-box" style="background: #dafbe1;">
+                <strong>📱 Telegram 推送</strong><br>
+                自动发送基金涨跌情况
+            </div>
+        </div>
+
+        <div class="step">
+            <h2><span class="badge">步骤 1</span>配置 Secrets</h2>
+            <p>在GitHub仓库中配置以下3个Secrets：</p>
+            
+            <div class="secret-example">
+                <h3>📍 TELEGRAM_BOT_TOKEN</h3>
+                <p><strong>作用：</strong>Telegram Bot 访问令牌</p>
+                <div class="code-block">123456789:ABCdefGHIjklMNOpqrsTUVwxyz1234567890</div>
+                <p><strong>获取方式：</strong></p>
+                <ul>
+                    <li>在Telegram搜索 <code>@BotFather</code></li>
+                    <li>发送 <code>/newbot</code> 创建机器人</li>
+                    <li>获得Token后复制保存</li>
+                </ul>
+            </div>
+
+            <div class="secret-example">
+                <h3>📍 TELEGRAM_CHAT_ID</h3>
+                <p><strong>作用：</strong>接收消息的账户ID</p>
+                <div class="code-block">123456789</div>
+                <p><strong>获取方式：</strong></p>
+                <ul>
+                    <li>在Telegram搜索 <code>@userinfobot</code></li>
+                    <li>向它发送任意消息</li>
+                    <li>机器人会返回你的ID</li>
+                </ul>
+            </div>
+
+            <div class="secret-example">
+                <h3>📍 FUND_LIST</h3>
+                <p><strong>作用：</strong>要监控的基金列表（JSON格式）</p>
+                <div class="code-block">[
+  {
+    "code": "001186",
+    "name": "富国文体健康",
+    "shares": 1000
+  },
+  {
+    "code": "110022",
+    "name": "易方达消费行业",
+    "shares": 500
+  }
+]</div>
+                <p><strong>说明：</strong></p>
+                <ul>
+                    <li><code>code</code>: 基金代码（6位数字）</li>
+                    <li><code>name</code>: 基金名称（可选）</li>
+                    <li><code>shares</code>: 持有份额（0表示只监控）</li>
+                </ul>
+                <div class="warning">
+                    ⚠️ JSON格式必须正确，建议使用 <a href="https://jsonlint.com/" target="_blank">JSONLint</a> 验证
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h2><span class="badge">步骤 2</span>添加 Secrets 到 GitHub</h2>
+            <ol>
+                <li>进入仓库页面</li>
+                <li>点击 <span class="highlight">Settings</span> → <span class="highlight">Secrets and variables</span> → <span class="highlight">Actions</span></li>
+                <li>点击 <span class="highlight">New repository secret</span></li>
+                <li>输入 Secret 名称和值</li>
+                <li>点击 <span class="highlight">Add secret</span></li>
+                <li>重复以上步骤添加全部3个Secrets</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h2><span class="badge">步骤 3</span>启用 GitHub Actions</h2>
+            <ol>
+                <li>进入仓库的 <span class="highlight">Actions</span> 标签页</li>
+                <li>如果Actions被禁用，点击 <span class="highlight">Enable Actions</span></li>
+                <li>找到 <span class="highlight">每日基金推送到Telegram</span> 工作流</li>
+                <li>点击 <span class="highlight">Enable workflow</span></li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h2><span class="badge">步骤 4</span>手动测试运行</h2>
+            <ol>
+                <li>在 <span class="highlight">Actions</span> 页面</li>
+                <li>选择 <span class="highlight">每日基金推送到Telegram</span></li>
+                <li>点击右侧 <span class="highlight">Run workflow</span> 按钮</li>
+                <li>选择分支并确认运行</li>
+                <li>查看运行日志，确认是否成功</li>
+            </ol>
+            <div class="success">
+                ✅ 如果看到Telegram收到消息，说明配置成功！
+            </div>
+        </div>
+
+        <div class="step">
+            <h2>🎯 完成！</h2>
+            <p>现在系统将自动在每个工作日的以下时间推送：</p>
+            <ul>
+                <li>☀️ 早上 9:00 - 开盘前查看行情</li>
+                <li>🌙 下午 3:30 - 收盘后查看收益</li>
+            </ul>
+            <p>您可以随时在 <strong>Actions</strong> 页面查看运行历史和日志。</p>
+        </div>
+
+        <div class="warning" style="margin-top: 30px;">
+            <strong>📝 注意事项：</strong>
+            <ul style="margin: 10px 0;">
+                <li>GitHub Actions的cron可能延迟5-15分钟</li>
+                <li>仓库长期无活动可能导致Actions暂停</li>
+                <li>Secrets是加密存储的，安全可靠</li>
+                <li>公共仓库GitHub Actions完全免费</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

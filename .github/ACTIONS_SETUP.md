@@ -2,6 +2,8 @@
 
 本指南将帮助您配置GitHub Actions，实现自动定时推送基金通知到Telegram。
 
+![GitHub Actions 配置指南](https://github.com/user-attachments/assets/d725ad46-5ae1-4cc2-b693-c5fb763b9823)
+
 ## 功能说明
 
 GitHub Actions工作流会在以下时间自动运行：

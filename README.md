@@ -37,6 +37,10 @@
 
 基于原有的基金数据API，新增了自动推送每天基金涨跌情况到Telegram的功能！
 
+**推送消息预览：**
+
+![Telegram消息预览](https://github.com/user-attachments/assets/d67c2cad-f67b-4acb-bb25-094e132557a2)
+
 **主要特性：**
 - 📱 自动推送基金估值、涨跌幅到Telegram
 - ⏰ 支持自定义定时推送（如早9点、午3:30）

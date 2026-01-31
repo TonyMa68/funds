@@ -136,6 +136,10 @@ pm2 restart funds-telegram
 
 ## 消息示例
 
+**推送消息预览：**
+
+![Telegram消息预览](https://github.com/user-attachments/assets/d67c2cad-f67b-4acb-bb25-094e132557a2)
+
 推送的消息格式示例：
 
 ```

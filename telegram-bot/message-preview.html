@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基金Telegram推送消息预览</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #0e1621;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .telegram-message {
+            background: #1c2733;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 500px;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .message-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .message-date {
+            color: #8899a6;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .fund-item {
+            background: #242f3d;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        .fund-name {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        .fund-name.up {
+            color: #4caf50;
+        }
+        .fund-name.down {
+            color: #f44336;
+        }
+        .fund-detail {
+            font-size: 13px;
+            color: #b0b8c1;
+            line-height: 1.8;
+            padding-left: 10px;
+        }
+        .summary {
+            border-top: 2px solid #3d4f62;
+            margin-top: 15px;
+            padding-top: 15px;
+        }
+        .summary-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .summary-detail {
+            font-size: 13px;
+            color: #b0b8c1;
+            line-height: 1.8;
+            padding-left: 10px;
+        }
+        .positive {
+            color: #4caf50;
+        }
+        .negative {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="telegram-message">
+        <div class="message-header">📊 基金每日报告</div>
+        <div class="message-date">📅 2024/1/31 15:30</div>
+        
+        <div class="fund-item">
+            <div class="fund-name up">📈 富国文体健康</div>
+            <div class="fund-detail">
+                代码: 001186<br>
+                净值: 1.52 → 1.54<br>
+                涨跌: <span class="positive">+0.98%</span><br>
+                持仓: 1000份<br>
+                收益: <span class="positive">+15.00元</span>
+            </div>
+        </div>
+        
+        <div class="fund-item">
+            <div class="fund-name down">📉 易方达消费行业 ✅</div>
+            <div class="fund-detail">
+                代码: 110022<br>
+                净值: 3.21 → 3.19<br>
+                涨跌: <span class="negative">-0.81%</span><br>
+                持仓: 500份<br>
+                收益: <span class="negative">-13.00元</span>
+            </div>
+        </div>
+        
+        <div class="summary">
+            <div class="summary-title">📊 汇总统计</div>
+            <div class="summary-detail">
+                上涨: <span class="positive">1</span>只 | 下跌: <span class="negative">1</span>只<br>
+                总持仓: 3130.50元<br>
+                总收益: <span class="positive">+2.00元</span><br>
+                收益率: <span class="positive">+0.06%</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

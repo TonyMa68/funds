@@ -106,3 +106,6 @@ dist-zip
 dev.md
 src/popup/App copy.vue
 .DS_Store
+
+# Telegram bot config (contains sensitive data)
+telegram-bot/config.json

@@ -47,9 +47,19 @@
 - 💰 自动计算持仓收益和总收益
 - 📊 美观的消息格式，一目了然
 - 🔄 自动识别交易日，休市日不推送
+- 🤖 支持GitHub Actions自动运行（推荐）
 
 **快速开始：**
 
+**方式一：使用GitHub Actions（推荐，无需服务器）**
+```bash
+# 1. Fork本仓库
+# 2. 在仓库设置中添加Secrets（Bot Token、Chat ID、基金列表）
+# 3. 启用Actions即可自动运行
+```
+详细配置指南：[.github/ACTIONS_SETUP.md](.github/ACTIONS_SETUP.md)
+
+**方式二：本地运行**
 ```bash
 cd telegram-bot
 npm install

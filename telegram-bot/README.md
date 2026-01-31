@@ -12,8 +12,58 @@
 - ✅ 支持份额配置，自动计算收益
 - ✅ 美观的消息格式，包含emoji图标
 - ✅ 区分已更新净值和估值
+- ✅ 支持GitHub Actions自动运行（无需服务器）
 
-## 快速开始
+## 部署方式选择
+
+### 方式一：GitHub Actions（推荐）
+
+**优点：**
+- ✅ 完全免费，无需服务器
+- ✅ 自动运行，无需维护
+- ✅ 配置简单，只需设置Secrets
+- ✅ 可随时查看运行日志
+
+**缺点：**
+- ❌ 依赖GitHub服务
+- ❌ cron调度可能延迟5-15分钟
+
+**配置指南：** [../.github/ACTIONS_SETUP.md](../.github/ACTIONS_SETUP.md)
+
+### 方式二：本地/服务器运行
+
+**优点：**
+- ✅ 完全自主控制
+- ✅ 运行时间精确
+- ✅ 可扩展更多功能
+
+**缺点：**
+- ❌ 需要服务器或保持电脑运行
+- ❌ 需要手动维护
+
+**配置指南：** 见下文"本地运行配置"
+
+---
+
+## GitHub Actions 配置（方式一）
+
+详细配置步骤请查看：[../.github/ACTIONS_SETUP.md](../.github/ACTIONS_SETUP.md)
+
+**快速步骤：**
+
+1. Fork本仓库到您的GitHub账号
+2. 在仓库Settings → Secrets中添加：
+   - `TELEGRAM_BOT_TOKEN`: 您的Bot Token
+   - `TELEGRAM_CHAT_ID`: 您的Chat ID
+   - `FUND_LIST`: 基金列表（JSON格式）
+3. 在Actions标签页启用工作流
+4. 手动运行一次测试
+
+完成！系统将自动在每个工作日早9:00和下午3:30推送消息。
+
+---
+
+## 本地运行配置（方式二）
 
 ### 1. 创建Telegram Bot
 

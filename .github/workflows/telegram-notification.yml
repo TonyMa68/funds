@@ -1,0 +1,57 @@
+name: 每日基金推送到Telegram
+
+on:
+  schedule:
+    # 早报：每个工作日上午9:00 (UTC+8 = UTC+0 - 8小时 = 1:00 UTC)
+    - cron: '0 1 * * 1-5'
+    # 午报：每个工作日下午3:30 (UTC+8 = UTC+0 - 8小时 = 7:30 UTC)
+    - cron: '30 7 * * 1-5'
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  send-telegram-notification:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+      
+      - name: 设置 Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: telegram-bot/package-lock.json
+      
+      - name: 安装依赖
+        run: |
+          cd telegram-bot
+          npm ci
+      
+      - name: 创建配置文件
+        run: |
+          cd telegram-bot
+          cat > config.json << EOF
+          {
+            "telegram": {
+              "botToken": "${{ secrets.TELEGRAM_BOT_TOKEN }}",
+              "chatId": "${{ secrets.TELEGRAM_CHAT_ID }}"
+            },
+            "schedule": {
+              "morningReport": "0 0 9 * * 1-5",
+              "afternoonReport": "0 30 15 * * 1-5"
+            },
+            "funds": ${{ secrets.FUND_LIST }}
+          }
+          EOF
+      
+      - name: 发送Telegram通知
+        run: |
+          cd telegram-bot
+          node index.js --now
+        env:
+          TZ: 'Asia/Shanghai'
+      
+      - name: 显示执行结果
+        if: always()
+        run: echo "任务执行完成"

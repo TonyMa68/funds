@@ -11,6 +11,8 @@ on:
 jobs:
   send-telegram-notification:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read  # 只需要读取代码的权限
     
     steps:
       - name: 检出代码

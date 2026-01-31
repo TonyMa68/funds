@@ -99,7 +99,7 @@ function generateFundReport(fundDataList, configFunds) {
     let gains = 0;
     
     // 判断是否已更新当日净值
-    const isUpdated = pdate !== '--' && pdate === gztime.substr(0, 10);
+    const isUpdated = pdate !== '--' && pdate === gztime.substring(0, 10);
     
     if (isUpdated) {
       currentNav = nav;

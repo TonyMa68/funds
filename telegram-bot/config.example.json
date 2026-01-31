@@ -4,8 +4,8 @@
     "chatId": "YOUR_CHAT_ID_HERE"
   },
   "schedule": {
-    "morningReport": "0 9 0 * * 1-5",
-    "afternoonReport": "0 15 30 * * 1-5"
+    "morningReport": "0 0 9 * * 1-5",
+    "afternoonReport": "0 30 15 * * 1-5"
   },
   "funds": [
     {
